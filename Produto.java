@@ -1,12 +1,23 @@
 import java.util.Objects;
 
 public class Produto {
+
+    /**
+     * Criação dos Atributos Finalizado
+     */
     private Integer id;
     private String nome;
     private double preco;
     private int quantidadeEstoque;
     private String categoria;
 
+    /**
+     * Criação do Construtor Finalizado
+     * @param nome
+     * @param preco
+     * @param quantidadeEstoque
+     * @param categoria
+     */
     public Produto(String nome, double preco, int quantidadeEstoque, String categoria) {
         this.nome = nome;
         this.preco = preco;
@@ -14,6 +25,10 @@ public class Produto {
         this.categoria = categoria;
     }
 
+    /**
+     * Criação dos gets e sets Finalizado
+     * @return
+     */
     public Integer getId() {
         return id;
     }
@@ -54,6 +69,10 @@ public class Produto {
         this.categoria = categoria;
     }
 
+    /**
+     * Criação do ToString Finalizado
+     * @return
+     */
     @Override
     public String toString() {
         return "Produto" +
@@ -64,6 +83,11 @@ public class Produto {
                 "categoria: '" + categoria ;
     }
 
+    /**
+     * Criação do Equals e do HashCode Finalizado
+     * @param
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

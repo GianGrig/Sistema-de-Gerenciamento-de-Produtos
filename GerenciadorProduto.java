@@ -8,7 +8,7 @@ public class GerenciadorProduto extends Produto {
     public GerenciadorProduto(String nome, double preco, int quantidadeEstoque, String categoria, ArrayList<Produto> produtos, int proximoId) {
         super(nome,preco,quantidadeEstoque,categoria);
         this.produtos = new ArrayList<>();
-        this.proximoId = proximoId;
+        this.proximoId = 1;
     }
 
     public ArrayList<Produto> getProdutos() {
@@ -27,10 +27,12 @@ public class GerenciadorProduto extends Produto {
         this.proximoId = proximoId;
     }
 
+    // Finalizado
     public void criar(Produto produto) {
         produtos.add(produto);
     }
 
+    // Finalizado
     public Produto buscarPorId(int id) {
         for (Produto p : produtos) {
             if (p.getId().equals(id)) {
@@ -40,7 +42,8 @@ public class GerenciadorProduto extends Produto {
         return null;
     }
 
-    public List<Produto> listarProdutos() {
+    // Finalizado
+    public List<Produto> listarTodos() {
         ArrayList<Produto> produtos = new ArrayList<>();
         for (Produto p : produtos) {
             produtos.add(p);
@@ -48,14 +51,20 @@ public class GerenciadorProduto extends Produto {
         return produtos;
     }
 
+    // Finalizado
     public boolean atualizar(Produto produto) {
         for (Produto p : produtos) {
             if (p.getId().equals(produto.getId())) {
-                p.
+                p.setPreco(produto.getPreco());
+                p.setCategoria(produto.getCategoria());
+                p.setQuantidadeEstoque(produto.getQuantidadeEstoque());
+                return true;
             }
         }
+        return false;
     }
 
+    // Finalizado
     public boolean remover(Produto produto) {
         for (Produto p : produtos) {
             if (p.getId().equals(produto.getId())) {
@@ -66,18 +75,38 @@ public class GerenciadorProduto extends Produto {
         return false;
     }
 
+    // Finalizado
     public List<Produto> bucarPorNome(String nome) {
         ArrayList<Produto> produtos = new ArrayList<>();
         for (Produto p : produtos) {
-            if (p.getNome().equals(nome)) {
-                produtos.add(p);
+            if (p.getNome().equalsIgnoreCase(nome)) {
+                return produtos;
             }
         }
+        return null;
     }
 
-    public List<Produto> buscarPorCategoria(String categoria) {}
+    // Finalizado
+    public List<Produto> buscarPorCategoria(String categoria) {
+        ArrayList<Produto> produtos = new ArrayList<>();
+        for (Produto p : produtos) {
+            if (p.getCategoria().equalsIgnoreCase(categoria)) {
+                return produtos;
+            }
+        }
+        return null;
+    }
 
-    private void validarProduto(Produto produto) {
-
+    // Finalizado
+    private void validadarProduto(Produto produto) {
+        if (produto.getNome() == null || produto.getNome().trim().isEmpty()) {
+            throw new IllegalArgumentException("O nome do produto não pode ser vazio.");
+        }
+        if (produto.getPreco() <= 0) {
+            throw new IllegalArgumentException("O preço do produto deve ser positivo.");
+        }
+        if (produto.getQuantidadeEstoque() < 0) {
+            throw new IllegalArgumentException("A quantidade do produto não pode ser negativa.");
+        }
     }
 }
