@@ -1,3 +1,7 @@
+package com.loja.gerenciador.GerenciadorProdutos;
+
+import com.loja.modelo.Produto.Produto;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +33,15 @@ public class GerenciadorProduto extends Produto {
 
     // Finalizado
     public void criar(Produto produto) {
-        produtos.add(produto);
+        if (validarDados(produto)){
+            produto.setId(proximoId++);
+            produtos.add(produto);
+        }
+    }
+
+    private boolean validarDados(Produto produto){
+        return produto.getNome() != null && !produto.getNome().isEmpty() &&
+                produto.getPreco() > 0 && produto.getQuantidadeEstoque() >= 0;
     }
 
     // Finalizado

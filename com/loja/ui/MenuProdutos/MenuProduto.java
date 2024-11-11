@@ -1,17 +1,21 @@
-import java.util.ArrayList;
+package com.loja.ui.MenuProdutos;
+
+import com.loja.gerenciador.GerenciadorProdutos.GerenciadorProduto;
+
 import java.util.Scanner;
 
-public class MenuProduto extends GerenciadorProduto{
-    Scanner scanner = new Scanner(System.in);
-    GerenciadorProduto gerenciador;
+public class MenuProduto {
+    private Scanner scanner = new Scanner(System.in);
+    private GerenciadorProduto gerenciador;
 
-    public MenuProduto(String nome, double preco, int quantidadeEstoque, String categoria, ArrayList<Produto> produtos, int proximoId) {
-        super(nome, preco, quantidadeEstoque, categoria, produtos, proximoId);
-        this.gerenciador = new GerenciadorProduto(nome, preco, quantidadeEstoque, categoria, produtos, proximoId);
+    public MenuProduto(Scanner scanner, GerenciadorProduto gerenciador) {
+        this.scanner = scanner;
+        this.gerenciador = gerenciador;
     }
 
     public void exibirMenu(){
-        while(true){
+        int opcao;
+        do{
             System.out.println("\nMenu do produto \n");
             System.out.println("1. Adicionar produto");
             System.out.println("2. Atualizar produto");
@@ -21,33 +25,35 @@ public class MenuProduto extends GerenciadorProduto{
             System.out.println("6. Buscar produto por Nome");
             System.out.println("7. Buscar produto por Categoria");
             System.out.println("8. Sair");
-            int opcao = scanner.nextInt();
+            opcao = scanner.nextInt();
+            scanner.nextInt();
             switch(opcao){
                 case 1:
-                    criar();
+                    gerenciador.criar();
                     break;
                 case 2:
-                    atualizar();
+                    gerenciador.atualizar();
                     break;
                 case 3:
-                    remover();
+                    gerenciador.remover();
                     break;
                 case 4:
-                    listarTodos();
+                    gerenciador.listarTodos();
                     break;
                 case 5:
-                    buscarPorId();
+                    gerenciador.buscarPorId();
                     break;
                 case 6:
-                    bucarPorNome();
+                    gerenciador.bucarPorNome();
                     break;
                 case 7:
-                    buscarPorCategoria();
+                    gerenciador.buscarPorCategoria();
                     break;
                 case 8:
                     System.out.println("Saindo...");
                     break;
             }
         }
+        while (opcao != 0);
     }
 }
